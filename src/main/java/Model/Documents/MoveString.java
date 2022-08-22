@@ -1,9 +1,10 @@
 package Model.Documents;
 
 import Model.Directories.Product;
+import Model.Service.DocumentsService;
 
-public class SaleString {
-    private final Sale headReference;
+public class MoveString implements IDocumentStringable{
+    private final IDocumentHeadable headReference;
     private final long documentID;
 
     private Product product;
@@ -12,12 +13,13 @@ public class SaleString {
 
 
     //constructor
-    public SaleString(Sale headReference, Product product, float count, float price) {
+    public MoveString(IDocumentHeadable headReference, Product product, float count, float price) {
         this.headReference = headReference;
         this.product = product;
         this.count = count;
         this.price = price;
-        this.documentID = getNewUnicalID();
+        this.documentID = DocumentsService.getNewUnicID(this);
+        headReference.addString(this);
     }
 
     public Product getProduct() {
@@ -34,14 +36,6 @@ public class SaleString {
 
     public void setCount(float count) {
         this.count = count;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
 }

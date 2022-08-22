@@ -1,10 +1,11 @@
 package Model.Documents;
 
 import Model.Directories.Product;
+import Model.Service.DocumentsService;
 
 //строка документа Purchase
-public class PurchaseString {
-    private final Purchase headReference;
+public class PurchaseString implements IDocumentStringable{
+    private final IDocumentHeadable headReference;
     private final long documentID;
 
     private Product product;
@@ -12,12 +13,13 @@ public class PurchaseString {
     private float price;
 
     //constructor
-    public PurchaseString(Purchase headReference, Product product, float count, float price) {
+    public PurchaseString(IDocumentHeadable headReference, Product product, float count, float price) {
         this.headReference = headReference;
         this.product = product;
         this.count = count;
         this.price = price;
-        this.documentID = getNewUnicalID();
+        this.documentID = DocumentsService.getNewUnicID(this);
+        headReference.addString(this);
     }
 
     public Product getProduct() {

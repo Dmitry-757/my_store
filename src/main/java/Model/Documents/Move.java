@@ -1,10 +1,11 @@
 package Model.Documents;
 
 import Model.Directories.Store;
+import Model.Service.DocumentsService;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
-public class Move {
+public class Move implements IDocumentHeadable{
     private final long documentID;
     private String docNumber;
     private Store storeDonor;
@@ -13,15 +14,16 @@ public class Move {
 
 
     //ссылка на строки документа
-    private HashMap<Move, MoveString> documentString = new HashMap<>();
+    private HashSet<IDocumentStringable> documentStrings = new HashSet<>();
 
     //constructor
     public Move(String docNumber, Store storeDonor, Store storeRecipient) {
         this.docNumber = docNumber;
         this.storeDonor = storeDonor;
         this.storeRecipient = storeRecipient;
-        this.documentID = getNewUnicalID();
+        this.documentID = DocumentsService.getNewUnicID(this);
     }
+
 
     public String getDocNumber() {
         return docNumber;
@@ -47,8 +49,12 @@ public class Move {
         this.storeRecipient = storeRecipient;
     }
 
-    public HashMap<Move, MoveString> getDocumentString() {
-        return documentString;
+    public HashSet<IDocumentStringable> getDocumentString() {
+        return documentStrings;
     }
 
+    @Override
+    public void addString(IDocumentStringable documentString){
+        documentStrings.add(documentString);
+    }
 }

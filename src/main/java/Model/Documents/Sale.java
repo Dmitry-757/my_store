@@ -1,22 +1,23 @@
 package Model.Documents;
 
 import Model.Directories.Store;
+import Model.Service.DocumentsService;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
-public class Sale {
+public class Sale implements IDocumentHeadable{
     private final long documentID;
     private String docNumber;
     private Store store;
 
     //ссылка на строки документа
-    private HashMap<Purchase, SaleString> documentString = new HashMap<>();
+    private HashSet<IDocumentStringable> documentStrings = new HashSet<>();
 
     //constructor
     public Sale(String docNumber, Store store) {
         this.docNumber = docNumber;
         this.store = store;
-        this.documentID = getNewUnicalID();
+        this.documentID = DocumentsService.getNewUnicID(this);
     }
 
     public String getDocNumber() {
@@ -35,8 +36,13 @@ public class Sale {
         this.store = store;
     }
 
-    public HashMap<Purchase, SaleString> getDocumentString() {
-        return documentString;
+    public HashSet<IDocumentStringable> getDocumentString() {
+        return documentStrings;
+    }
+
+    @Override
+    public void addString(IDocumentStringable documentString){
+        documentStrings.add(documentString);
     }
 
 }
