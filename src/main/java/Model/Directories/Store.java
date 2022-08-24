@@ -34,4 +34,11 @@ public class Store {
     public int hashCode() {
         return Objects.hash(storeId, storeName);
     }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "storeName='" + storeName + '\'' +
+                '}';
+    }
 }

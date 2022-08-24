@@ -19,6 +19,7 @@ public class PurchaseString implements IDocumentStringable{
         this.count = count;
         this.price = price;
         this.documentID = DocumentsService.getNewUnicID(this);
+        //теперь добавим эту строку к головной части (headReference - ссылка на "голову")
         headReference.addString(this);
     }
 
@@ -46,4 +47,12 @@ public class PurchaseString implements IDocumentStringable{
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "PurchaseString{" +
+                "product=" + product +
+                ", count=" + count +
+                ", price=" + price +
+                '}';
+    }
 }

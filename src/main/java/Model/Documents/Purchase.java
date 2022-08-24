@@ -46,4 +46,17 @@ public class Purchase implements IDocumentHeadable{
         documentStrings.add(documentString);
     }
 
+    @Override
+    public String toString() {
+
+        //System.out.println(str);
+        return "Purchase{" +
+                "documentID=" + documentID +
+                ", docNumber='" + docNumber + '\'' +
+                ", store=" + store +
+                '}'+"\n"
+                + "Doc strings: \n"+
+                documentStrings.stream().toList().toString()
+                ;
+    }
 }
