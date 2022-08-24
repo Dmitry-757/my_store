@@ -1,5 +1,5 @@
 import Model.Directories.Product;
-import Model.Directories.Services;
+import Model.Directories.Service;
 import Model.Directories.Store;
 import Model.Documents.*;
 
@@ -8,7 +8,7 @@ public class Main {
 
         Store store = new Store("Store №1");
         Product product = new Product("article 111", "Apple",1000, 2000);
-        Services service = new Services("our service #1");
+        Service service = new Service("our service #1");
 
 
 //        Purchase purchase = new Purchase("purchase №1", store);

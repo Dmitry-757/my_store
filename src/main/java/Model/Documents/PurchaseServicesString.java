@@ -1,21 +1,21 @@
 package Model.Documents;
 
-import Model.Directories.Services;
+import Model.Directories.Service;
 import Model.Service.DocumentsService;
 
 
 
 
-public class PurchaseStringServices implements IDocumentStringable {
+public class PurchaseServicesString implements IDocumentStringable {
     private final IDocumentHeadable headReference;
     private final long documentID;
 
-    private Services service;
+    private Service service;
     private float count;
     private float price;
 
     //constructor
-    public PurchaseStringServices(IDocumentHeadable headReference, Services service, float count, float price) {
+    public PurchaseServicesString(IDocumentHeadable headReference, Service service, float count, float price) {
         this.headReference = headReference;
         this.service = service;
         this.count = count;
@@ -25,11 +25,11 @@ public class PurchaseStringServices implements IDocumentStringable {
         headReference.addString(this);
     }
 
-    public Services getService() {
+    public Service getService() {
         return service;
     }
 
-    public void setService(Services service) {
+    public void setService(Service service) {
         this.service = service;
     }
 
@@ -52,7 +52,7 @@ public class PurchaseStringServices implements IDocumentStringable {
     @Override
     public String toString() {
         return "PurchaseString{" +
-                "product=" + service +
+                service +
                 ", count=" + count +
                 ", price=" + price +
                 '}';

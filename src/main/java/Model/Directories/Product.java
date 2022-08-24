@@ -1,23 +1,26 @@
 package Model.Directories;
 
+import Model.Service.DocumentsService;
+
 import java.util.Objects;
 
 public class Product {
-    private long productID;
+    private long ID;
     private String article;
-    private String productName;
+    private String Name;
     private float lastPurchasePrice;
     private float lastSalePrice;
 
     public Product(String article, String productName, float lastPurchasePrice, float lastSalePrice) {
         this.article = article;
-        this.productName = productName;
+        this.Name = productName;
         this.lastPurchasePrice = lastPurchasePrice;
         this.lastSalePrice = lastSalePrice;
+        this.ID = DocumentsService.getNewUnicID(this);
     }
 
     public long getProductID() {
-        return productID;
+        return ID;
     }
 
     public String getArticle() {
@@ -29,11 +32,11 @@ public class Product {
     }
 
     public String getProductName() {
-        return productName;
+        return Name;
     }
 
     public void setProductName(String productName) {
-        this.productName = productName;
+        this.Name = productName;
     }
 
     public float getLastPurchasePrice() {
@@ -57,19 +60,22 @@ public class Product {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return Float.compare(product.lastPurchasePrice, lastPurchasePrice) == 0 && Float.compare(product.lastSalePrice, lastSalePrice) == 0 && article.equals(product.article) && productName.equals(product.productName);
+        return Float.compare(product.lastPurchasePrice, lastPurchasePrice) == 0 &&
+                Float.compare(product.lastSalePrice, lastSalePrice) == 0 &&
+                article.equals(product.article) && Name.equals(product.Name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productID, article, productName, lastPurchasePrice, lastSalePrice);
+        return Objects.hash(ID, article, Name, lastPurchasePrice, lastSalePrice);
     }
 
     @Override
     public String toString() {
         return "Product{" +
+                "ID=" + ID +
                 "article='" + article + '\'' +
-                ", productName='" + productName + '\'' +
+                ", Name='" + Name + '\'' +
                 '}';
     }
 }

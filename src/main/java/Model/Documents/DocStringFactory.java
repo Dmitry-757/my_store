@@ -1,7 +1,7 @@
 package Model.Documents;
 
 import Model.Directories.Product;
-import Model.Directories.Services;
+import Model.Directories.Service;
 
 //import java.io.IOException;
 //import java.io.InputStream;
@@ -28,7 +28,7 @@ public class DocStringFactory {
 
     public static IDocumentStringable getDocString(IDocumentHeadable headReference, Product product, float count, float price) {
 
-        docStringClass = "Model.Documents.PurchaseStringProducts";
+        docStringClass = "Model.Documents.PurchaseProductsString";
         try {
 //            docString = (IDocumentStringable)Class.forName(docStringClass).
             docString = (IDocumentStringable)Class.forName(docStringClass).
@@ -41,12 +41,12 @@ public class DocStringFactory {
 
         return docString;
     }
-    public static IDocumentStringable getDocString(IDocumentHeadable headReference, Services service, float count, float price) {
-        docStringClass = "Model.Documents.PurchaseStringServices";
+    public static IDocumentStringable getDocString(IDocumentHeadable headReference, Service service, float count, float price) {
+        docStringClass = "Model.Documents.PurchaseServicesString";
         try {
 //            docString = (IDocumentStringable)Class.forName(docStringClass).
             docString = (IDocumentStringable)Class.forName(docStringClass).
-                    getConstructor(IDocumentHeadable.class, Services.class, float.class, float.class).
+                    getConstructor(IDocumentHeadable.class, Service.class, float.class, float.class).
                     newInstance(headReference, service, count, price);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                 NoSuchMethodException | ClassNotFoundException e) {

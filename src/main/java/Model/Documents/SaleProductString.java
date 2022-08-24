@@ -3,22 +3,22 @@ package Model.Documents;
 import Model.Directories.Product;
 import Model.Service.DocumentsService;
 
-//строка документа Purchase
-public class PurchaseStringProducts implements IDocumentStringable{
+public class SaleProductString implements IDocumentStringable{
     private final IDocumentHeadable headReference;
-    private final long documentID;
+    private final long ID;
 
     private Product product;
     private float count;
     private float price;
 
+
     //constructor
-    public PurchaseStringProducts(IDocumentHeadable headReference, Product product, float count, float price) {
+    public SaleProductString(IDocumentHeadable headReference, Product product, float count, float price) {
         this.headReference = headReference;
         this.product = product;
         this.count = count;
         this.price = price;
-        this.documentID = DocumentsService.getNewUnicID(this);
+        this.ID = DocumentsService.getNewUnicID(this);
         //теперь добавим эту строку к головной части (headReference - ссылка на "голову")
         headReference.addString(this);
     }
@@ -47,12 +47,4 @@ public class PurchaseStringProducts implements IDocumentStringable{
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "PurchaseString{" +
-                "product=" + product +
-                ", count=" + count +
-                ", price=" + price +
-                '}';
-    }
 }
