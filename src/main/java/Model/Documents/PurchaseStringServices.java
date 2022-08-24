@@ -1,21 +1,23 @@
 package Model.Documents;
 
-import Model.Directories.Product;
+import Model.Directories.Services;
 import Model.Service.DocumentsService;
 
-//строка документа Purchase
-public class PurchaseString implements IDocumentStringable{
+
+
+
+public class PurchaseStringServices implements IDocumentStringable {
     private final IDocumentHeadable headReference;
     private final long documentID;
 
-    private Product product;
+    private Services service;
     private float count;
     private float price;
 
     //constructor
-    public PurchaseString(IDocumentHeadable headReference, Product product, float count, float price) {
+    public PurchaseStringServices(IDocumentHeadable headReference, Services service, float count, float price) {
         this.headReference = headReference;
-        this.product = product;
+        this.service = service;
         this.count = count;
         this.price = price;
         this.documentID = DocumentsService.getNewUnicID(this);
@@ -23,12 +25,12 @@ public class PurchaseString implements IDocumentStringable{
         headReference.addString(this);
     }
 
-    public Product getProduct() {
-        return product;
+    public Services getService() {
+        return service;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setService(Services service) {
+        this.service = service;
     }
 
     public float getCount() {
@@ -50,9 +52,11 @@ public class PurchaseString implements IDocumentStringable{
     @Override
     public String toString() {
         return "PurchaseString{" +
-                "product=" + product +
+                "product=" + service +
                 ", count=" + count +
                 ", price=" + price +
                 '}';
     }
+
+
 }
