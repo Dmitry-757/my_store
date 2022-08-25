@@ -45,4 +45,16 @@ public class Sale implements IDocumentHeadable{
         documentStrings.add(documentString);
     }
 
+    public String toString() {
+        //System.out.println(str);
+        return "Sale{" +
+                "documentID=" + documentID +
+                ", docNumber='" + docNumber + '\'' +
+                ", store=" + store +
+                '}'+"\n"
+                + "Doc strings: \n"+
+                documentStrings.stream().toList().toString()
+                ;
+    }
+
 }

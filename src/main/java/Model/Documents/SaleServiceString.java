@@ -47,4 +47,13 @@ public class SaleServiceString implements IDocumentStringable{
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "SAleString{" +
+                service +
+                ", count=" + count +
+                ", price=" + price +
+                '}';
+    }
+
 }

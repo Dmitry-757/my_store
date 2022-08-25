@@ -57,4 +57,18 @@ public class Move implements IDocumentHeadable{
     public void addString(IDocumentStringable documentString){
         documentStrings.add(documentString);
     }
+
+    public String toString() {
+        //System.out.println(str);
+        return "Move{" +
+                "documentID=" + documentID +
+                ", docNumber='" + docNumber + '\'' +
+                ", storeFrom=" + storeDonor +
+                ", storeTo=" + storeRecipient +
+                '}'+"\n"
+                + "Doc strings: \n"+
+                documentStrings.stream().toList().toString()
+                ;
+    }
+
 }
