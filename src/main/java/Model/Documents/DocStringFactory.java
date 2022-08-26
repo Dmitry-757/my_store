@@ -11,17 +11,6 @@ public class DocStringFactory {
     private static String docStringClass;
 
 
-//    static {
-//        Properties properties = new Properties();
-//        try ( InputStream is = DocStringFactory.class.getClassLoader().getResourceAsStream("app.properties")) {
-//            properties.load(is);
-//            docStringClass = properties.getProperty("docStringClass");
-//
-//            //use reflection
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public static IDocumentStringable getDocString(IDocumentHeadable headReference, Product product, float count, float price) {
         docStringClass = "Model.Documents.PurchaseProductsString";
@@ -36,6 +25,11 @@ public class DocStringFactory {
 
         return docString;
     }
+
+    //***************************************************************
+    //*** let`s play to polymorphism ;) ***
+
+    //if its need to use Service in string
     public static IDocumentStringable getDocString(IDocumentHeadable headReference, Service service, float count, float price) {
         docStringClass = "Model.Documents.PurchaseServicesString";
         try {
@@ -50,7 +44,7 @@ public class DocStringFactory {
         return docString;
     }
 
-
+    //if its need to use Product in string
     public static IDocumentStringable getDocString(IDocumentHeadable headReference, Product product, float count) {
         docStringClass = "Model.Documents.MoveProductsString";
         try {

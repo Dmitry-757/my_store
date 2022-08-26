@@ -1,6 +1,7 @@
 package Model.Service;
 
 import Model.Directories.Product;
+import Model.Directories.Service;
 import Model.Directories.Store;
 import Model.Documents.*;
 
@@ -81,24 +82,43 @@ public class DocumentsService {
     private static Object createSaleString(Object[] args) {
         if (args.length == 4) {
             Sale doc = (Sale) args[0];
-            Product product = (Product) args[1];
-            int count = (int) args[2];
-            int price = (int) args[3];
-
-            return DocStringFactory.getDocString(doc, product, count, price);
+            String className = args[1].getClass().getName();
+            switch (className) {
+                case "Model.Directories.Service" -> {
+                    Service subj = (Service) args[1];
+                    int count = (int) args[2];
+                    int price = (int) args[3];
+                    return DocStringFactory.getDocString(doc, subj, count, price);
+                }
+                case "Model.Directories.Product" -> {
+                    Product subj = (Product) args[1];
+                    int count = (int) args[2];
+                    int price = (int) args[3];
+                    return DocStringFactory.getDocString(doc, subj, count, price);
+                }
+            }
         }
         return null;
     }
 
     private static Object createPurchaseString(Object[] args) {
         if (args.length == 4) {
-            //DocStringFactory.getDocString(purchase4, product, 10, 1100)
             Purchase doc = (Purchase) args[0];
-            Product product = (Product) args[1];
-            int count = (int) args[2];
-            int price = (int) args[3];
-
-            return DocStringFactory.getDocString(doc, product, count, price);
+            String className = args[1].getClass().getName();
+            switch (className) {
+                case "Model.Directories.Service" -> {
+                    Service subj = (Service) args[1];
+                    int count = (int) args[2];
+                    int price = (int) args[3];
+                    return DocStringFactory.getDocString(doc, subj, count, price);
+                }
+                case "Model.Directories.Product" -> {
+                    Product subj = (Product) args[1];
+                    int count = (int) args[2];
+                    int price = (int) args[3];
+                    return DocStringFactory.getDocString(doc, subj, count, price);
+                }
+            }
         }
         return null;
     }

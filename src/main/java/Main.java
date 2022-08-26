@@ -17,12 +17,14 @@ public class Main {
 //        PurchaseString purchaseString = new PurchaseString(purchase, product, 10, 1100);
         Purchase purchase = (Purchase) DocumentsService.getNewDocument(TypesOfDocuments.PURCHASE,"purchase №1", store);
             DocumentsService.getNewDocumentString(TypesOfDocuments.PURCHASE ,purchase, product, 10, 1100);
+            DocumentsService.getNewDocumentString(TypesOfDocuments.PURCHASE ,purchase, service, 10, 1100);
         System.out.println(purchase.toString());
 
-        System.out.println();
-
+//        System.out.println();
+//
         Sale sale = (Sale)DocumentsService.getNewDocument(TypesOfDocuments.SALE,"sale №2", store);
             DocumentsService.getNewDocumentString(TypesOfDocuments.SALE ,sale, product, 5, 1500);
+            DocumentsService.getNewDocumentString(TypesOfDocuments.SALE ,sale, service, 1, 500);
         System.out.println(sale.toString());
 
         System.out.println();
