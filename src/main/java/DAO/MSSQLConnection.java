@@ -6,7 +6,7 @@ public class MSSQLConnection {
     private static String username = "sa";
     private static String password = "a430LBcn";
 //    private static String URL = "jdbc:jtds:sqlserver://localhost:1433/myStore";
-    private static String URL = "jdbc:jtds:sqlserver://localhost:1433/";
+    private static String URL = "jdbc:jtds:sqlserver://localhost:1433/myStore";
     public static Connection connectionExp;
 
     static {
@@ -24,11 +24,11 @@ public class MSSQLConnection {
         }
     }
 
-    public static Connection getConnection(String dbName){
+    public static Connection getConnection(){
         //if connection is closed - lets open it again
         try {
             if (connectionExp.isClosed() ) {
-                connectionExp = DriverManager.getConnection(URL+dbName, username, password);
+                connectionExp = DriverManager.getConnection(URL, username, password);
             }
         } catch (SQLException e) {
             e.printStackTrace();

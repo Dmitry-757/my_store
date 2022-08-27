@@ -1,6 +1,7 @@
 package Model.Directories;
 
-import Model.Service.DocumentsService;
+import DAO.ProductDAO;
+
 
 import java.util.Objects;
 
@@ -11,17 +12,29 @@ public class Product {
     private float lastPurchasePrice;
     private float lastSalePrice;
 
+    //constructor for new product
     public Product(String article, String productName, float lastPurchasePrice, float lastSalePrice) {
         this.article = article;
         this.name = productName;
         this.lastPurchasePrice = lastPurchasePrice;
         this.lastSalePrice = lastSalePrice;
-        this.id = DocumentsService.getNewUnicID(this);
+        //this.id = DocumentsService.getNewUnicID(this);
+        this.id = ProductDAO.insert(this);
     }
 
-    public long getProductID() {
+    //for product created from database
+    public Product(int id, String article, String productName, float lastPurchasePrice, float lastSalePrice) {
+        this.article = article;
+        this.name = productName;
+        this.lastPurchasePrice = lastPurchasePrice;
+        this.lastSalePrice = lastSalePrice;
+        this.id = id;
+    }
+
+    public long getID() {
         return id;
     }
+
 
     public String getArticle() {
         return article;
@@ -31,11 +44,11 @@ public class Product {
         this.article = article;
     }
 
-    public String getProductName() {
+    public String getName() {
         return name;
     }
 
-    public void setProductName(String productName) {
+    public void setName(String productName) {
         this.name = productName;
     }
 
@@ -60,9 +73,11 @@ public class Product {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return Float.compare(product.lastPurchasePrice, lastPurchasePrice) == 0 &&
+        return id == product.id &&
+                Float.compare(product.lastPurchasePrice, lastPurchasePrice) == 0 &&
                 Float.compare(product.lastSalePrice, lastSalePrice) == 0 &&
-                article.equals(product.article) && name.equals(product.name);
+                article.equals(product.article) &&
+                name.equals(product.name);
     }
 
     @Override

@@ -17,8 +17,8 @@ public class CreateDBTables {
                         "begin " +
                         "CREATE DATABASE myStore " +
                         "end ";
-        try (Connection connection = DBConnection.getConnection("myStore");
-             Statement statement = connection.createStatement();
+        try (Connection connection = DBConnection.getConnection();
+             Statement statement = connection.createStatement()
         ) {
 
             statement.executeUpdate(PREPARE_QUERY);
@@ -36,7 +36,8 @@ public class CreateDBTables {
                 "create table Products "
                         +"("
                         + " id int not null identity(1, 1) primary key, "
-                        + " article nvarchar(100) not null unique check (article <> N''), "
+//                        + " article nvarchar(100) not null unique check (article <> N''), "
+                        + " article nvarchar(100) not null, "
                         + " name nvarchar(100) not null, "
                         + " lastPurchasePrice money not null check (lastPurchasePrice >= 0.0), "
                         + " lastSalePrice money not null check (lastSalePrice >= 0.0) "
@@ -133,8 +134,8 @@ public class CreateDBTables {
                         + " );";
 
 
-        try (Connection connection = DBConnection.getConnection("myStore");
-             Statement statement = connection.createStatement();
+        try (Connection connection = DBConnection.getConnection();
+             Statement statement = connection.createStatement()
         ) {
             statement.addBatch(CREATE_TABLE_Products);
             statement.addBatch(CREATE_TABLE_Services);
