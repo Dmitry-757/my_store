@@ -7,7 +7,7 @@ import Model.Service.DocumentsService;
 import java.util.HashSet;
 
 public class Purchase implements IDocumentHeadable{
-    private final long documentID;
+    private final long id;
     private String docNumber;
     private Store store;
 
@@ -17,7 +17,7 @@ public class Purchase implements IDocumentHeadable{
     public Purchase(String docNumber, Store store) {
         this.docNumber = docNumber;
         this.store = store;
-        this.documentID = DocumentsService.getNewUnicID(this);
+        this.id = DocumentsService.getNewUnicID(this);
     }
 
 
@@ -51,7 +51,7 @@ public class Purchase implements IDocumentHeadable{
 
         //System.out.println(str);
         return "Purchase{" +
-                "documentID=" + documentID +
+                "documentID=" + id +
                 ", docNumber='" + docNumber + '\'' +
                 ", store=" + store +
                 '}'+"\n"

@@ -6,7 +6,7 @@ import Model.Service.DocumentsService;
 import java.util.HashSet;
 
 public class Move implements IDocumentHeadable{
-    private final long documentID;
+    private final long id;
     private String docNumber;
     private Store storeDonor;
     private Store storeRecipient;
@@ -21,7 +21,7 @@ public class Move implements IDocumentHeadable{
         this.docNumber = docNumber;
         this.storeDonor = storeDonor;
         this.storeRecipient = storeRecipient;
-        this.documentID = DocumentsService.getNewUnicID(this);
+        this.id = DocumentsService.getNewUnicID(this);
     }
 
 
@@ -61,7 +61,7 @@ public class Move implements IDocumentHeadable{
     public String toString() {
         //System.out.println(str);
         return "Move{" +
-                "documentID=" + documentID +
+                "documentID=" + id +
                 ", docNumber='" + docNumber + '\'' +
                 ", storeFrom=" + storeDonor +
                 ", storeTo=" + storeRecipient +

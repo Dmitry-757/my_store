@@ -5,7 +5,7 @@ import Model.Service.DocumentsService;
 
 public class MoveProductsString implements IDocumentStringable{
     private final IDocumentHeadable headReference;
-    private final long documentID;
+    private final long id;
 
     private Product product;
     private float count;
@@ -17,7 +17,7 @@ public class MoveProductsString implements IDocumentStringable{
         this.headReference = headReference;
         this.product = product;
         this.count = count;
-        this.documentID = DocumentsService.getNewUnicID(this);
+        this.id = DocumentsService.getNewUnicID(this);
         //теперь добавим эту строку к головной части (headReference - ссылка на "голову")
         headReference.addString(this);
     }

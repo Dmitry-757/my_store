@@ -5,22 +5,22 @@ import Model.Service.DocumentsService;
 import java.util.Objects;
 
 public class Product {
-    private long ID;
+    private final long id;
     private String article;
-    private String Name;
+    private String name;
     private float lastPurchasePrice;
     private float lastSalePrice;
 
     public Product(String article, String productName, float lastPurchasePrice, float lastSalePrice) {
         this.article = article;
-        this.Name = productName;
+        this.name = productName;
         this.lastPurchasePrice = lastPurchasePrice;
         this.lastSalePrice = lastSalePrice;
-        this.ID = DocumentsService.getNewUnicID(this);
+        this.id = DocumentsService.getNewUnicID(this);
     }
 
     public long getProductID() {
-        return ID;
+        return id;
     }
 
     public String getArticle() {
@@ -32,11 +32,11 @@ public class Product {
     }
 
     public String getProductName() {
-        return Name;
+        return name;
     }
 
     public void setProductName(String productName) {
-        this.Name = productName;
+        this.name = productName;
     }
 
     public float getLastPurchasePrice() {
@@ -62,20 +62,20 @@ public class Product {
         Product product = (Product) o;
         return Float.compare(product.lastPurchasePrice, lastPurchasePrice) == 0 &&
                 Float.compare(product.lastSalePrice, lastSalePrice) == 0 &&
-                article.equals(product.article) && Name.equals(product.Name);
+                article.equals(product.article) && name.equals(product.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, article, Name, lastPurchasePrice, lastSalePrice);
+        return Objects.hash(id, article, name, lastPurchasePrice, lastSalePrice);
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "ID=" + ID +
+                "ID=" + id +
                 ", article='" + article + '\'' +
-                ", Name='" + Name + '\'' +
+                ", Name='" + name + '\'' +
                 '}';
     }
 }

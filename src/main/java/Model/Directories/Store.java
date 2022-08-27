@@ -1,25 +1,28 @@
 package Model.Directories;
 
+import Model.Service.DocumentsService;
+
 import java.util.Objects;
 
 public class Store {
-    private long storeId;
-    private String storeName;
+    private final long id;
+    private String name;
 
     public Store(String storeName) {
-        this.storeName = storeName;
+        this.name = storeName;
+        this.id = DocumentsService.getNewUnicID(this);
     }
 
-    public long getStoreId() {
-        return storeId;
+    public long getId() {
+        return id;
     }
 
-    public String getStoreName() {
-        return storeName;
+    public String getName() {
+        return name;
     }
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -27,18 +30,18 @@ public class Store {
         if (this == o) return true;
         if (!(o instanceof Store)) return false;
         Store store = (Store) o;
-        return storeName.equals(store.storeName);
+        return name.equals(store.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(storeId, storeName);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
         return "Store{" +
-                "storeName='" + storeName + '\'' +
+                "storeName='" + name + '\'' +
                 '}';
     }
 }
