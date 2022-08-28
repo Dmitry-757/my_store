@@ -3,6 +3,8 @@ package DAO;
 import Model.Directories.Product;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAO {
 
@@ -45,6 +47,33 @@ public class ProductDAO {
     }
 
 
+
+    public List< Product > getAll() {
+
+        String sql_query = "Select * from Products;";
+        List < Product > units = new ArrayList< >();
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql_query)) {
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int resId = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String article = resultSet.getString("article");
+                float lastPurchasePrice = resultSet.getInt("lastPurchasePrice");
+                float lastSalePrice = resultSet.getInt("lastSalePrice");
+
+                units.add(new Product(resId, article, name, lastPurchasePrice, lastSalePrice));
+            }
+        } catch (SQLException e) {
+//            printSQLException(e);
+            e.printStackTrace();
+        }
+        return units;
+    }
+
     public static long insert(Product unit) {
         if (!isExistById(unit.getID())) {
             String SQL_Query = "INSERT INTO Products  (article, name, lastPurchasePrice, lastSalePrice) VALUES " +
@@ -55,8 +84,8 @@ public class ProductDAO {
             ) {
                 preparedStatement.setString(1, unit.getArticle());
                 preparedStatement.setString(2, unit.getName());
-                preparedStatement.setString(3, "" + unit.getLastPurchasePrice());
-                preparedStatement.setString(4, "" + unit.getLastSalePrice());
+                preparedStatement.setFloat(3, unit.getLastPurchasePrice());
+                preparedStatement.setFloat(4, unit.getLastSalePrice());
 //                System.out.println(preparedStatement);
                 preparedStatement.executeUpdate();
                 ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -81,9 +110,9 @@ public class ProductDAO {
             ) {
                 preparedStatement.setString(1, unit.getArticle());
                 preparedStatement.setString(2, unit.getName());
-                preparedStatement.setString(3, "" + unit.getLastPurchasePrice());
-                preparedStatement.setString(4, "" + unit.getLastSalePrice());
-                preparedStatement.setString(5, "" + unit.getID());
+                preparedStatement.setFloat(3, unit.getLastPurchasePrice());
+                preparedStatement.setFloat(4, unit.getLastSalePrice());
+                preparedStatement.setLong(5, unit.getID());
 //            System.out.println(preparedStatement);
                 preparedStatement.executeUpdate();
 
@@ -92,6 +121,25 @@ public class ProductDAO {
             }
         }
     }
+
+    public static boolean delete(Product unit) {
+        boolean rowDeleted = false;
+        if (isExistById(unit.getID())) {
+            String SQL_Query ="delete from Products where id = ?;";
+            try (Connection connection = DBConnection.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(SQL_Query)
+            ) {
+                preparedStatement.setLong(1, unit.getID());
+
+                rowDeleted = preparedStatement.executeUpdate()>0;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return rowDeleted;
+    }
+
 
 
 }
