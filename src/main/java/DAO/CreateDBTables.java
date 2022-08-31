@@ -42,6 +42,15 @@ public class CreateDBTables {
                         + " lastPurchasePrice money not null check (lastPurchasePrice >= 0.0), "
                         + " lastSalePrice money not null check (lastSalePrice >= 0.0) "
                         + " );";
+        String CREATE_SP_INSERT_PRODUCT =
+                "create procedure my_sp_insertProduct " +
+                        "@article nvarchar(100), " +
+                        "@name nvarchar(100), " +
+                        "@lastPurchasePrice money, " +
+                        "@lastSalePrice money " +
+                        "as " +
+                        "insert Products " +
+                        "values(@article, @name, @lastPurchasePrice, @lastSalePrice);";
 
         String CREATE_TABLE_Services =
                 "create table Services " +
@@ -50,12 +59,26 @@ public class CreateDBTables {
                         "name nvarchar(100) not null, " +
                         " );";
 
+        String CREATE_SP_INSERT_SERVICE =
+                "create procedure my_sp_insertService " +
+                        "@name nvarchar(100) " +
+                        "as " +
+                        "insert Services " +
+                        "values(@name);";
+
         String CREATE_TABLE_Stores =
                 "create table Stores " +
                         "( " +
                         "id int not null identity(1, 1) primary key, " +
                         "name nvarchar(100) not null, " +
                         " );";
+
+        String CREATE_SP_INSERT_STORE =
+                "create procedure my_sp_insertStore " +
+                        "@name nvarchar(100) " +
+                        "as " +
+                        "insert Stores " +
+                        "values(@name);";
 
         String CREATE_TABLE_Purchases =
                 "create table Purchases "
@@ -64,6 +87,15 @@ public class CreateDBTables {
                         + " docNumber nvarchar(12) not null unique check (docNumber <> N''), "
                         + " storeId int not null foreign key (storeId) references Stores(Id)"
                         + " );";
+
+        String CREATE_SP_INSERT_PURCHASE =
+                "create procedure my_sp_insertPurchase " +
+                        "@docNumber nvarchar(12) " +
+                        "@storeId int " +
+                        "as " +
+                        "insert Purchases " +
+                        "values(@docNumber, @storeId);";
+
 
         String CREATE_TABLE_PurchaseProductsString =
                 "create table PurchaseProductsString "

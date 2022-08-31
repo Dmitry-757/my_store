@@ -15,7 +15,6 @@ public class ProductDAO {
             //statement.addBatch(CREATE_TABLE_Products);
             String sql_query = "Select top 1 * from Products where id = " + id;
             ResultSet resultSet = statement.executeQuery(sql_query);
-            String name;
             if (resultSet.next()) { //if in result of query exist at list one element
                 return true;
             }
@@ -101,6 +100,7 @@ public class ProductDAO {
         }
         return 0;
     }
+
 
     public static void update(Product unit) {
         if (isExistById(unit.getID())) {
